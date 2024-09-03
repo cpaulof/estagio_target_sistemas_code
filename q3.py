@@ -1,14 +1,25 @@
-# OBS. O SITE NAO DISPONIBILIZOU DADOS ENTAO CRIEI ALEATORIAMENTE
-# Dado um vetor que guarda o valor de
-# faturamento diário de uma distribuidora
+# ATUALIZADO PARA UTILIZAR dados.json
 
-# 30 dias
-# 0 sao finais de semana o feriados
-FATURAMENTO = [10527.8, 48579.07, 49787.5, 44176.61, 44432.24, 0, 0, 
-               39831.84, 10950.16, 34845.97, 15068.99, 31488.34, 0, 0, 
-               44389.92, 0, 32030.28, 47219.69, 23282.5, 0, 0, 
-               24121.13, 46331.35, 38784.38, 0, 25629.51, 0, 0, 
-               42686.76, 45198.53]
+
+import json
+
+arquivo = "./dados.json"
+def processar_arquivo(filepath):
+    with open(arquivo, 'r') as file:
+        dados = json.load(file)
+        file.close()
+    # print(dados)
+    faturamento = [v['valor'] for v in dados]
+    print(faturamento)
+    return faturamento
+
+# FATURAMENTO = [10527.8, 48579.07, 49787.5, 44176.61, 44432.24, 0, 0, 
+#                39831.84, 10950.16, 34845.97, 15068.99, 31488.34, 0, 0, 
+#                44389.92, 0, 32030.28, 47219.69, 23282.5, 0, 0, 
+#                24121.13, 46331.35, 38784.38, 0, 25629.51, 0, 0, 
+#                42686.76, 45198.53]
+
+FATURAMENTO = processar_arquivo(arquivo)
 
 def obter_dias_uteis(mes):
     return len(mes) - mes.count(0)
